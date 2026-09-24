@@ -9,6 +9,7 @@ qt_add_library(range-base-lib
         src/rbl_error.cpp
         src/rbl_file_tools.cpp
         src/rbl_imatrix.cpp
+        src/rbl_interaction_record_v1.cpp
         src/rbl_ivector.cpp
         src/rbl_job.cpp
         src/rbl_job_manager.cpp
@@ -42,6 +43,7 @@ qt_add_library(range-base-lib
         include/rbl_error.h
         include/rbl_file_tools.h
         include/rbl_imatrix.h
+        include/rbl_interaction_record_v1.h
         include/rbl_ivector.h
         include/rbl_job.h
         include/rbl_job_manager.h

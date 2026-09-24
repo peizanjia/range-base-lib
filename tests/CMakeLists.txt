@@ -19,6 +19,7 @@ set(range_base_lib_tests
     tst_limit_box
     tst_statistics
     tst_uvector
+    tst_interaction_record_v1
 )
 
 foreach(test_name IN LISTS range_base_lib_tests)
