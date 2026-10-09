@@ -20,6 +20,7 @@
 #endif
 
 #define R_LOG_LEVEL_NORMAL static_cast<RLogLevelMask>(RMessage::Type::Info | RMessage::Type::Notice | RMessage::Type::Error)
+#define R_LOG_LEVEL_QUIET static_cast<RLogLevelMask>(RMessage::Type::Error | RMessage::Type::Warning)
 #define R_LOG_LEVEL_DETAIL static_cast<RLogLevelMask>(RMessage::Type::Info | RMessage::Type::Notice | RMessage::Type::Error | RMessage::Type::Warning)
 #define R_LOG_LEVEL_DEBUG  static_cast<RLogLevelMask>(RMessage::Type::Info | RMessage::Type::Notice | RMessage::Type::Error | RMessage::Type::Warning | RMessage::Type::Debug)
 #define R_LOG_LEVEL_TRACE  static_cast<RLogLevelMask>(RMessage::Type::Info | RMessage::Type::Notice | RMessage::Type::Error | RMessage::Type::Warning | RMessage::Type::Debug | RMessage::Type::Trace)
@@ -47,6 +48,7 @@
 
 #define R_LOG_LEVEL_IS_VALID(_level) \
 (                                    \
+  (_level == R_LOG_LEVEL_QUIET)  ||  \
   (_level == R_LOG_LEVEL_NORMAL) ||  \
   (_level == R_LOG_LEVEL_DETAIL) ||  \
   (_level == R_LOG_LEVEL_DEBUG)  ||  \
