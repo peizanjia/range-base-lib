@@ -1,6 +1,7 @@
 # Create a static library
 qt_add_library(range-base-lib
     STATIC
+        src/rbl_hash_sha256.cpp
         src/rbl_application_state.cpp
         src/rbl_argument_option.cpp
         src/rbl_arguments_parser.cpp
@@ -34,6 +35,7 @@ qt_add_library(range-base-lib
         src/rbl_value_vector.cpp
         src/rbl_version.cpp
         src/rbl_local_direction.cpp
+        include/rbl_hash_sha256.h
         include/rbl_application_state.h
         include/rbl_argument_option.h
         include/rbl_arguments_parser.h
@@ -85,4 +87,9 @@ target_link_libraries(range-base-lib
 # Unit tests (opt-in via -DRANGE_BUILD_TESTS=ON)
 if(RANGE_BUILD_TESTS)
     add_subdirectory(tests)
+endif()
+
+# Windows built-in CNG SHA-256; no redistributed crypto library.
+if(WIN32)
+    target_link_libraries(range-base-lib PRIVATE bcrypt)
 endif()

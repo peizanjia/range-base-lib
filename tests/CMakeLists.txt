@@ -12,6 +12,7 @@ endif()
 set(CMAKE_AUTOMOC ON)
 
 set(range_base_lib_tests
+    tst_hash_sha256
     tst_rvector
     tst_r3vector
     tst_rmatrix
@@ -35,3 +36,14 @@ foreach(test_name IN LISTS range_base_lib_tests)
             ENVIRONMENT_MODIFICATION "PATH=path_list_prepend:$<TARGET_FILE_DIR:Qt6::Core>")
     endif()
 endforeach()
+
+# Exercise the Qt portability backend even on the Windows CI host.
+qt_add_executable(tst_hash_sha256_qt tst_hash_sha256.cpp ../src/rbl_hash_sha256.cpp)
+target_compile_definitions(tst_hash_sha256_qt PRIVATE RANGE_SHA256_TEST_QT_BACKEND)
+target_include_directories(tst_hash_sha256_qt PRIVATE ../include)
+target_link_libraries(tst_hash_sha256_qt PRIVATE Qt6::Core Qt6::Test)
+add_test(NAME tst_hash_sha256_qt COMMAND tst_hash_sha256_qt)
+if(WIN32)
+    set_tests_properties(tst_hash_sha256_qt PROPERTIES
+        ENVIRONMENT_MODIFICATION "PATH=path_list_prepend:$<TARGET_FILE_DIR:Qt6::Core>")
+endif()
