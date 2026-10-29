@@ -197,7 +197,9 @@ void RProgressPrint(double fraction)
 
 void RProgressPrint(uint64_t step, uint64_t nSteps)
 {
-    RProgress::getInstance().print(double(step)/double(nSteps));
+    // An empty work list is already complete. Avoid sending NaN to the
+    // logger's progress-mark count when there are no element pairs.
+    RProgress::getInstance().print(nSteps == 0 ? 1.0 : double(step)/double(nSteps));
 } /* RProgressPrint */
 
 
